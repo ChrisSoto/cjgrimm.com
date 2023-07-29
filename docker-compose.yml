@@ -1,0 +1,9 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/html/public
