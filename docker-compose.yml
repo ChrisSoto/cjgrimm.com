@@ -6,7 +6,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./src:/var/www/html/public
+      - ./src:/var/www/html
     depends_on:
       - mysql
       - php
@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: php.dockerfile
     volumes:
-      - ./src:/var/www/html/public
+      - ./src:/var/www/html
   composer:
     build:
       context: .
@@ -34,3 +34,19 @@ services:
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
+  npm:
+    image: node:current-alpine
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["npm"]
+    working_dir: /var/www/html
+  artisan:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - mysql
+    entrypoint: ["php", "/var/www/html/artisan"]
