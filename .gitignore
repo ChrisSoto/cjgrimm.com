@@ -1,1 +1,10 @@
 nginx/certs/*
+!nginx/certs/.placeholder
+mysql/*
+!mysql/.placeholder
+
+.env
+npm-debug.log
+/.idea
+/.vscode
+.DS_Store
